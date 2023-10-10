@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynRanger", "src\RoslynRanger\RoslynRanger.csproj", "{6970873F-8098-4887-A7C3-2F3BF1C7E6FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63606E0F-C978-4F24-B021-6D048AC52563}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A5B4C521-A2EE-4905-AE7D-C4434BFB38B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynRanger.Tests", "test\RoslynRanger.Tests\RoslynRanger.Tests.csproj", "{B9395094-A776-4593-B19C-CDB4B4F7ECE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D0994779-BCB4-480A-9913-7DD35A5D4810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynRanger.Sample", "samples\RoslynRanger.Sample\RoslynRanger.Sample.csproj", "{DEF00472-AE9B-477B-84D4-BE8B09F8A089}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{670DF840-FF08-4852-A6B2-2617D3A2AD4C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6970873F-8098-4887-A7C3-2F3BF1C7E6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6970873F-8098-4887-A7C3-2F3BF1C7E6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6970873F-8098-4887-A7C3-2F3BF1C7E6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6970873F-8098-4887-A7C3-2F3BF1C7E6FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9395094-A776-4593-B19C-CDB4B4F7ECE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9395094-A776-4593-B19C-CDB4B4F7ECE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9395094-A776-4593-B19C-CDB4B4F7ECE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9395094-A776-4593-B19C-CDB4B4F7ECE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF00472-AE9B-477B-84D4-BE8B09F8A089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF00472-AE9B-477B-84D4-BE8B09F8A089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF00472-AE9B-477B-84D4-BE8B09F8A089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF00472-AE9B-477B-84D4-BE8B09F8A089}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6970873F-8098-4887-A7C3-2F3BF1C7E6FB} = {63606E0F-C978-4F24-B021-6D048AC52563}
+		{B9395094-A776-4593-B19C-CDB4B4F7ECE6} = {A5B4C521-A2EE-4905-AE7D-C4434BFB38B5}
+		{DEF00472-AE9B-477B-84D4-BE8B09F8A089} = {D0994779-BCB4-480A-9913-7DD35A5D4810}
+	EndGlobalSection
+EndGlobal
