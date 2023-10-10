@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+
+        <RootNamespace>RoslynRanger</RootNamespace>
+        <AssemblyName>RoslynRanger</AssemblyName>
+        <Version>0.1.0</Version>
+        <Authors>Jean Farrugia</Authors>
+        <Description>A collection of Rosyln Analyzers to avoid common pitfalls</Description>
+        <Copyright>Copyright Jean Farrugia</Copyright>
+        <PackageIcon>logo_icon_128.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/frg/RoslynRanger</PackageProjectUrl>
+        <PackageTags>rosyln;analyzers;codesmell;autofix;diagnostic</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Company>Jean Farrugia</Company>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\RoslynRanger.snk</AssemblyOriginatorKeyFile>
+        <EnablePackageValidation>true</EnablePackageValidation>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\assets\logo\logo_icon_128.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>logo_icon_128.png</Link>
+        </None>
+        <None Remove="RoslynRanger.snk" />
+    </ItemGroup>
+
+</Project>
