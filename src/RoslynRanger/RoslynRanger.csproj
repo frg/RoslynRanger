@@ -19,6 +19,7 @@
         <PackageProjectUrl>https://github.com/frg/RoslynRanger</PackageProjectUrl>
         <PackageTags>rosyln;analyzers;codesmell;autofix;diagnostic</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <Company>Jean Farrugia</Company>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\RoslynRanger.snk</AssemblyOriginatorKeyFile>
