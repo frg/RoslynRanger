@@ -23,6 +23,7 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\RoslynRanger.snk</AssemblyOriginatorKeyFile>
         <EnablePackageValidation>true</EnablePackageValidation>
+        <PackageId>Frg.RoslynRanger</PackageId>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
