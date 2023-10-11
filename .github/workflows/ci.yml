@@ -35,9 +35,9 @@ jobs:
         run: |
           if [[ "${{ github.actor }}" == "github-actions[bot]" && "${{ github.event_name }}" == "push" ]]; then
             echo "This is a push event from github-actions[bot], skipping subsequent jobs."
-            echo "::set-output name=should_run::false"
+            echo "should_run=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=should_run::true"
+            echo "should_run=true" >> $GITHUB_OUTPUT
           fi
 
   update_version:
