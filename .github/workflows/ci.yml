@@ -31,6 +31,7 @@ jobs:
     steps:
       - name: Check if workflow should run
         id: check
+        shell: bash
         run: |
           if [[ "${{ github.actor }}" == "github-actions[bot]" && "${{ github.event_name }}" == "push" ]]; then
             echo "This is a push event from github-actions[bot], skipping subsequent jobs."
