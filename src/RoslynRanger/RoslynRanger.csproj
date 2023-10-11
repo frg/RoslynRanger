@@ -49,6 +49,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Include="$(OutputPath)\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+        <None Include="$(OutputPath)\*.pdb" Pack="true" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+
+    <ItemGroup>
         <EmbeddedResource Update="Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,7 +79,7 @@
     <ItemGroup>
         <None Include="..\..\assets\logo\logo_icon_128.png">
             <Pack>True</Pack>
-            <PackagePath></PackagePath>
+            <PackagePath>/</PackagePath>
             <Link>logo_icon_128.png</Link>
         </None>
         <None Remove="RoslynRanger.snk" />
