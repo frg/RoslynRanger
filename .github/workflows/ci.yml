@@ -46,6 +46,7 @@ jobs:
     # You can update this logic if you want to manage releases differently
     if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
+    needs: [ check_run_condition ]
     steps:
       - uses: actions/checkout@v3
 
@@ -69,7 +70,7 @@ jobs:
   create_nuget:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ update_version ]
+    needs: [ update_version, check_run_condition ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -93,7 +94,7 @@ jobs:
   validate_nuget:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ create_nuget ]
+    needs: [ create_nuget, check_run_condition ]
     steps:
       # Install the .NET SDK indicated in the global.json file
       - name: Setup .NET
@@ -118,6 +119,7 @@ jobs:
   run_test:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
+    needs: [ check_run_condition ]
     steps:
       - uses: actions/checkout@v3
 
