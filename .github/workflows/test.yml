@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: jobs library
+on:
+  workflow_call: # Makes workflow reusable
+
+jobs:
+
+  run_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: Run tests
+        run: dotnet test --configuration Release
