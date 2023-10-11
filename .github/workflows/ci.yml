@@ -70,11 +70,9 @@ jobs:
 #          git push
 
   create_and_validate_nuget:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/package.yml
-        with:
-          nuget-dir: ${{ env.NUGET_DIR }}
+    uses: ./.github/workflows/package.yml
+    with:
+      nuget-dir: ${{ env.NUGET_DIR }}
 
   test:
     uses: ./.github/workflows/test.yml
