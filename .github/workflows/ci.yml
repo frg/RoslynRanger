@@ -94,7 +94,7 @@ jobs:
   validate_nuget:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ create_nuget, check_run_condition ]
+    needs: [ create_nuget ]
     steps:
       # Install the .NET SDK indicated in the global.json file
       - name: Setup .NET
@@ -119,7 +119,6 @@ jobs:
   run_test:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ check_run_condition ]
     steps:
       - uses: actions/checkout@v3
 
@@ -135,7 +134,7 @@ jobs:
     # You can update this logic if you want to manage releases differently
     if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ update_version, validate_nuget, run_test ]
+    needs: [ validate_nuget, run_test ]
     steps:
       # Download the NuGet package created in the previous job
       - uses: actions/download-artifact@v3
