@@ -69,6 +69,8 @@ jobs:
 
   create_and_validate_nuget:
     uses: ./.github/workflows/package.yml
+    env:
+      NuGetDirectory: ${{ env.NuGetDirectory }}
 
   test:
     uses: ./.github/workflows/test.yml
