@@ -14,7 +14,9 @@ on:
       - published    # Run the workflow when a new GitHub release is published
 
 env:
+  # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_skip_first_time_experience
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry#disclosure
   DOTNET_NOLOGO: true
   NUGET_DIR: ${{ github.workspace }}/nuget
 
@@ -72,7 +74,7 @@ jobs:
     steps:
       - uses: ./.github/workflows/package.yml
         with:
-          nuget-path: ${{ env.NUGET_DIR }}
+          nuget-dir: ${{ env.NUGET_DIR }}
 
   test:
     uses: ./.github/workflows/test.yml
