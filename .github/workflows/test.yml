@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: jobs library
+name: test
 on:
   workflow_call: # Makes workflow reusable
 

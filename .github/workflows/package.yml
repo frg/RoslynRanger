@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: jobs library
+name: package
 on:
   workflow_call: # Makes workflow reusable
 
@@ -51,4 +51,4 @@ jobs:
       # using the --excluded-rules or --excluded-rule-ids option
       - name: Validate package
         run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg") --excluded-rule-ids 101
-        
+
