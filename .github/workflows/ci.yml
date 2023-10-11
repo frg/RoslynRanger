@@ -16,7 +16,7 @@ on:
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
-  NuGetDirectory: ${{ github.workspace }}/nuget
+  NUGET_DIR: ${{ github.workspace }}/nuget
 
 defaults:
   run:
@@ -69,8 +69,8 @@ jobs:
 
   create_and_validate_nuget:
     uses: ./.github/workflows/package.yml
-    env:
-      NuGetDirectory: ${{ env.NuGetDirectory }}
+    with:
+      nuget-path: ${{ env.NUGET_DIR }}
 
   test:
     uses: ./.github/workflows/test.yml
@@ -87,7 +87,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: nuget
-          path: ${{ env.NuGetDirectory }}
+          path: ${{ env.NUGET_DIR }}
 
       # Install the .NET SDK indicated in the global.json file
       - name: Setup .NET Core
@@ -98,6 +98,6 @@ jobs:
       # If you retry a failed workflow, already published packages will be skipped without error.
       - name: Publish NuGet package
         run: |
-          foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
+          foreach($file in (Get-ChildItem "${{ env.NUGET_DIR }}" -Recurse -Include *.nupkg)) {
               dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
           }
