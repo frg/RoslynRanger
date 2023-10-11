@@ -23,8 +23,52 @@ defaults:
     shell: pwsh
 
 jobs:
-  create_nuget:
+
+  check_run_condition:
     runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Check if workflow should run
+        id: check
+        run: |
+          if [[ "${{ github.actor }}" == "github-actions[bot]" && "${{ github.event_name }}" == "push" ]]; then
+            echo "This is a push event from github-actions[bot], skipping subsequent jobs."
+            echo "::set-output name=should_run::false"
+          else
+            echo "::set-output name=should_run::true"
+          fi
+
+  update_version:
+    # Publish only when creating a GitHub Release
+    # https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
+    # You can update this logic if you want to manage releases differently
+    if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: Update version
+        run: |
+          # Extract version from GitHub context
+          VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+
+          # Find all .csproj files that contain a <Version> tag and update them
+          find . -name '*.csproj' -print0 | xargs -0 grep -l '<Version>' | xargs -I {} sed -i 's|<Version>.*</Version>|<Version>'$VERSION'</Version>|' {}
+
+          # Commit changes
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "chore: 🔧 updated version to $VERSION"
+          git push
+
+  create_nuget:
+    if: needs.check_run_condition.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    needs: [ update_version ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -46,6 +90,7 @@ jobs:
           path: ${{ env.NuGetDirectory }}/*.nupkg
 
   validate_nuget:
+    if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     needs: [ create_nuget ]
     steps:
@@ -70,6 +115,7 @@ jobs:
         run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg") --excluded-rule-ids 101
 
   run_test:
+    if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -84,9 +130,9 @@ jobs:
     # Publish only when creating a GitHub Release
     # https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
     # You can update this logic if you want to manage releases differently
-    if: github.event_name == 'release'
+    if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
-    needs: [ validate_nuget, run_test ]
+    needs: [ update_version, validate_nuget, run_test ]
     steps:
       # Download the NuGet package created in the previous job
       - uses: actions/download-artifact@v3
