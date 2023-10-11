@@ -119,6 +119,7 @@ jobs:
   run_test:
     if: needs.check_run_condition.outputs.should_run == 'true'
     runs-on: ubuntu-latest
+    needs: [ check_run_condition ]
     steps:
       - uses: actions/checkout@v3
 
