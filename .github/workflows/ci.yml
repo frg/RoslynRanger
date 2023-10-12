@@ -37,6 +37,8 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       nuget-dir: ${{ needs.workflow_environment_vars.outputs.nuget_dir }}
+      # Commit hash that triggered this action run
+      commit-hash: ${{ github.sha }}
 
   test:
     uses: ./.github/workflows/test.yml
