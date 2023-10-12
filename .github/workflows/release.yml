@@ -69,7 +69,10 @@ jobs:
 
       - name: Get commit hash
         id: get_commit_hash
-        run: echo "commit-hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          echo "commit-hash=$(git rev-parse HEAD)"
+          echo "commit-hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   # Can't pass env variables to reusable workflow, so we use this hack
   workflow_environment_vars:
