@@ -11,7 +11,7 @@
 
         <RootNamespace>RoslynRanger</RootNamespace>
         <AssemblyName>RoslynRanger</AssemblyName>
-        <Version>0.1.2-beta.1</Version>
+        <Version>1.0.0-beta.1</Version>
         <Authors>Jean Farrugia</Authors>
         <Description>A collection of Rosyln Analyzers to avoid common pitfalls</Description>
         <Copyright>Copyright Jean Farrugia</Copyright>
