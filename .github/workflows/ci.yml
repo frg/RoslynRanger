@@ -72,6 +72,7 @@ jobs:
   create_and_validate_nuget:
     uses: ./.github/workflows/package.yml
     with:
+      # Can't pass env variables to reusable workflow
       nuget-dir: ${{ github.workspace }}/nuget
 
   test:

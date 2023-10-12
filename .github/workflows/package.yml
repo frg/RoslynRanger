@@ -8,6 +8,16 @@ on:
         required: true
         type: string
 
+env:
+  # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_skip_first_time_experience
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry#disclosure
+  DOTNET_NOLOGO: true
+  
+defaults:
+  run:
+    shell: pwsh
+
 jobs:
 
   create_nuget:
