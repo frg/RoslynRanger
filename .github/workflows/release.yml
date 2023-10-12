@@ -39,6 +39,9 @@ jobs:
           # Find all .csproj files that contain a <Version> tag and update them
           find . -name '*.csproj' -print0 | xargs -0 grep -l '<Version>' | xargs -I {} sed -i 's|<Version>.*</Version>|<Version>'$VERSION'</Version>|' {}
 
+          # Print out the diffs for the changes
+          git diff --cached
+
           # Commit changes
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
