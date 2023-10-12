@@ -40,6 +40,7 @@ jobs:
           # Commit changes
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git checkout main
           git commit -am "chore: 🔧 updated version to $VERSION"
           git push
 
