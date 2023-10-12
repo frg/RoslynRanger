@@ -26,50 +26,6 @@ defaults:
 
 jobs:
 
-  check_run_condition:
-    runs-on: ubuntu-latest
-    outputs:
-      should_run: ${{ steps.check.outputs.should_run }}
-    steps:
-      - name: Check if workflow should run
-        id: check
-        shell: bash
-        run: |
-          if [[ "${{ github.actor }}" == "github-actions[bot]" && "${{ github.event_name }}" == "push" ]]; then
-            echo "This is a push event from github-actions[bot], skipping subsequent jobs."
-            echo "should_run=false" >> $GITHUB_OUTPUT
-          else
-            echo "should_run=true" >> $GITHUB_OUTPUT
-          fi
-
-#  update_version:
-#    # Publish only when creating a GitHub Release
-#    # https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
-#    # You can update this logic if you want to manage releases differently
-#    if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
-#    runs-on: ubuntu-latest
-#    needs: [ check_run_condition ]
-#    steps:
-#      - uses: actions/checkout@v3
-#
-#      - name: Setup .NET
-#        uses: actions/setup-dotnet@v3
-#
-#      - name: Update version
-#        run: |
-#          # Extract version from GitHub context
-#          VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
-#
-#          # Find all .csproj files that contain a <Version> tag and update them
-#          find . -name '*.csproj' -print0 | xargs -0 grep -l '<Version>' | xargs -I {} sed -i 's|<Version>.*</Version>|<Version>'$VERSION'</Version>|' {}
-#
-#          # Commit changes
-#          git config --local user.email "action@github.com"
-#          git config --local user.name "GitHub Action"
-#          git commit -am "chore: 🔧 updated version to $VERSION"
-#          git push
-
-
   # Can't pass env variables to reusable workflow, so we use this hack
   workflow_environment_vars:
     runs-on: ubuntu-latest
@@ -87,30 +43,3 @@ jobs:
 
   test:
     uses: ./.github/workflows/test.yml
-
-  deploy:
-    # Publish only when creating a GitHub Release
-    # https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
-    # You can update this logic if you want to manage releases differently
-    if: github.event_name == 'release' && needs.check_run_condition.outputs.should_run == 'true'
-    runs-on: ubuntu-latest
-    needs: [ create_and_validate_nuget, test ]
-    steps:
-      # Download the NuGet package created in the previous job
-      - uses: actions/download-artifact@v3
-        with:
-          name: nuget
-          path: ${{ env.NUGET_DIR }}
-
-      # Install the .NET SDK indicated in the global.json file
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-
-      # Publish all NuGet packages to NuGet.org
-      # Use --skip-duplicate to prevent errors if a package with the same version already exists.
-      # If you retry a failed workflow, already published packages will be skipped without error.
-      - name: Publish NuGet package
-        run: |
-          foreach($file in (Get-ChildItem "${{ env.NUGET_DIR }}" -Recurse -Include *.nupkg)) {
-              dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-          }
