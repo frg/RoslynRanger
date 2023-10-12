@@ -1,5 +1,11 @@
 # RoslynRanger
 
+![GitHub](https://img.shields.io/github/license/frg/RoslynRanger)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/frg/RoslynRanger/ci.yml)
+![GitHub issues](https://img.shields.io/github/issues/frg/RoslynRanger)
+![Nuget](https://img.shields.io/nuget/dt/frg.RoslynRanger)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bbb3bf1f9a502cd12faa/maintainability)](https://codeclimate.com/github/frg/RoslynRanger/maintainability)
+
 RoslynRanger is a collection of Roslyn analyzers designed to reduce pull request back and forth and help developers avoid common pitfalls in C# and .NET
 
 ## Analyzers
