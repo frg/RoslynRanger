@@ -44,7 +44,7 @@ jobs:
           # Check for changes
           if ! git diff --quiet; then
             # Print out the diffs for the changes
-            git diff --cached
+            git diff
 
             # Commit changes
             git config --local user.email "action@github.com"
