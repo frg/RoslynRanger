@@ -74,13 +74,7 @@ jobs:
   workflow_environment_vars:
     runs-on: ubuntu-latest
     outputs:
-      nuget_dir: ${{ steps.step1.outputs.nuget_dir }}
-    steps:
-      - name: Print inputs passed to the reusable workflow
-        id: step1
-        run: |
-          echo "nuget_dir: ${{ env.NUGET_DIR }}"
-          echo "nuget_dir=${{ env.NUGET_DIR }}" >> $GITHUB_OUTPUT
+      nuget_dir: ${{ env.NUGET_DIR }}
 
   create_and_validate_nuget:
     needs: [ workflow_environment_vars ]
