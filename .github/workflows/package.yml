@@ -7,6 +7,9 @@ on:
       nuget-dir:
         required: true
         type: string
+      commit-hash:
+        required: true
+        type: string
 
 env:
   # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_skip_first_time_experience
@@ -23,13 +26,10 @@ jobs:
   create_nuget:
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        run: |
-          echo "nuget dir: ${{ inputs.nuget-dir }}"
-
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Get all history to allow automatic versioning using MinVer
+          ref: ${{ inputs.commit-hash }}
 
       # Install the .NET SDK indicated in the global.json file
       - name: Setup .NET

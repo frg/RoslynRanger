@@ -25,6 +25,8 @@ jobs:
 
   update_version:
     runs-on: ubuntu-latest
+    outputs:
+      commit-hash: ${{ steps.get_commit_hash.outputs.commit-hash }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -62,6 +64,10 @@ jobs:
           # Push the new tag to the remote repository
           git push origin ${{ github.event.release.tag_name }}
 
+      - name: Get commit hash
+        id: get_commit_hash
+        run: echo "commit-hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   # Can't pass env variables to reusable workflow, so we use this hack
   workflow_environment_vars:
     runs-on: ubuntu-latest
@@ -76,6 +82,7 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       nuget-dir: ${{ needs.workflow_environment_vars.outputs.nuget_dir }}
+      commit-hash: ${{ needs.update_version.outputs.commit-hash }}
 
   test:
     uses: ./.github/workflows/test.yml
