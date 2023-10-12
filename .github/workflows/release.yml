@@ -52,7 +52,7 @@ jobs:
             git commit -am "chore: 🔧 updated version to $VERSION"
             git push
 
-            CURRENT_TAG_HASH=${git rev-list -n 1 ${{ github.event.release.tag_name }}}
+            CURRENT_TAG_HASH=$(git rev-list -n 1 ${{ github.event.release.tag_name }})
             echo "Moving tag '${{ github.event.release.tag_name }}' to commit '$(git rev-parse HEAD)' from commit '${CURRENT_TAG_HASH}'"
 
             # Delete the old tag locally
