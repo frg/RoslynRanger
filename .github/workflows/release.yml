@@ -65,7 +65,10 @@ jobs:
             git tag ${{ github.event.release.tag_name }}
 
             # Push the new tag to the remote repository
-            git push --tags
+            git push origin ${{ github.event.release.tag_name }}
+
+            # Push all changes
+            git push
           else
             echo "Version as expected. Skipping version update commit."
           fi
