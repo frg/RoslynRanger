@@ -7,6 +7,9 @@ on:
     types:
       - published    # Run the workflow when a new GitHub release is published
 
+permissions:
+  contents: write
+
 env:
   # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_skip_first_time_experience
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -39,7 +42,6 @@ jobs:
           # Commit changes
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout main
           git commit -am "chore: 🔧 updated version to $VERSION"
           git push
 
