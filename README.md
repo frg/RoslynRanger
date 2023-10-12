@@ -4,13 +4,13 @@ RoslynRanger is a collection of Roslyn analyzers designed to reduce pull request
 
 ## Analyzers
 
-| Name                                      | Diagnostic Id | Description                           |
-|-------------------------------------------|---------------|---------------------------------------|
-| [MathRound](./src/RoslynRanger/README.md) | FR60001       | Recommends explicit rounding strategy |
+| Name                                                          | Diagnostic Id | Description                           |
+|---------------------------------------------------------------|---------------|---------------------------------------|
+| [Math.Round](./src/RoslynRanger/README.md#mathround-analyzer) | FR60001       | Recommends explicit rounding strategy |
 
 ## How to?
 
-### Change the severity within .editorconfig
+### Change severity level within .editorconfig
 
 | Key Format                                   | Value                                                                                                                                    |
 |----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
