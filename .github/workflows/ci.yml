@@ -75,6 +75,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       nuget_dir: ${{ env.NUGET_DIR }}
+    steps:
+      - run: |
+          echo "nuget_dir: ${{ env.NUGET_DIR }}"
 
   create_and_validate_nuget:
     needs: [ workflow_environment_vars ]
