@@ -43,6 +43,20 @@ jobs:
           git commit -am "chore: 🔧 updated version to $VERSION"
           git push
 
+      - name: Move tag
+        run: |
+          # Delete the old tag locally
+          git tag -d ${{ github.event.release.tag_name }}
+
+          # Delete the old tag from the remote repository
+          git push origin :${{ github.event.release.tag_name }}
+
+          # Create a new tag at the current commit
+          git tag ${{ github.event.release.tag_name }}
+
+          # Push the new tag to the remote repository
+          git push origin ${{ github.event.release.tag_name }}
+
   # Can't pass env variables to reusable workflow, so we use this hack
   workflow_environment_vars:
     runs-on: ubuntu-latest
