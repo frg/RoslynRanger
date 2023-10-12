@@ -70,7 +70,7 @@ jobs:
 #          git push
 
 
-        # Can't pass env variables to reusable workflow, so we use this hack
+  # Can't pass env variables to reusable workflow, so we use this hack
   workflow_environment_vars:
     runs-on: ubuntu-latest
     outputs:

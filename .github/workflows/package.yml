@@ -13,7 +13,7 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   # Source: https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry#disclosure
   DOTNET_NOLOGO: true
-  
+
 defaults:
   run:
     shell: pwsh
@@ -23,6 +23,10 @@ jobs:
   create_nuget:
     runs-on: ubuntu-latest
     steps:
+      - shell: bash
+        run: |
+          echo "nuget dir: ${{ inputs.nuget-dir }}"
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Get all history to allow automatic versioning using MinVer
